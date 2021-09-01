@@ -1,7 +1,7 @@
 import math
 import json
 
-path = 'C:\projects\georef-api\points.geojson'
+path = 'points.geojson'
 
 import json
 with open(path) as f:
@@ -42,4 +42,22 @@ dist, point = closest_point(all_points, my_position)
 
 position = all_points.index(point)
 print(data['features'][position]['properties']['marker-color'], point, dist)
+
+def haversine_distance(point1, point2):
+    R = 6371e3
+    x1, y1 = point1
+    x2, y2 = point2
+    phi_x1 = x1 * math.pi / 180.0
+    phi_x2 = x2 * math.pi / 180.0 
+    dx = (x2 - x1) * math.pi / 180.0
+    dy = (y2 - y1) * math.pi / 180.0
+
+    a = math.sin(dx/2) * math.sin(dx/2) + math.cos(phi_x1) * math.cos(phi_x2) * math.sin(dy/2) * math.sin(dy/2)
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+    return R * c
+
+p1 = [-56.05550765991211,-15.60352823309596]
+p2 = [-56.11249923706055, -15.585505930191367]
+print('Distância em metros  ' ,haversine_distance(p1, p2))
+
 
