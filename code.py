@@ -19,11 +19,19 @@ earth_radius = 6371e3
 distance_desired = 2000
 
 bt = BallTree(np.deg2rad(all_points), metric='haversine')
-indices = bt.query_radius(np.deg2rad(np.c_[query_lats, query_lons]), r=distance_desired/earth_radius)
+counter = bt.query_radius(np.deg2rad(np.c_[query_lats, query_lons]), r=distance_desired/earth_radius, count_only=True)
+distances, indices = bt.query(np.deg2rad(np.c_[query_lats, query_lons]), k=int(counter))
+meters = distances[0].tolist()
+retorno = []
 
-print(indices)
+# for i in range(len(indices)):
+#     data['features'][indices[i]]['properties'] = ["distance", meters[i]]
+#     retorno.append(data['features'][indices[i]])
 
-distances, indices = bt.query(np.deg2rad(np.c_[query_lats, query_lons]), 5)
+print(data)
+
+print(retorno)
 
 
-print(distances * earth_radius, indices)
+# mapear pontos para GEOJSON format - usar isso aqui -> https://github.com/jazzband/geojson
+# links uteis -> https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.BallTree.html
