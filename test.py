@@ -1,9 +1,9 @@
 import math
 import json
 
+
 path = 'points.geojson'
 
-import json
 with open(path) as f:
     data = json.load(f)
 
