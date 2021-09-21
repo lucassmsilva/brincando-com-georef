@@ -24,6 +24,7 @@ distances, indices = bt.query(np.deg2rad(np.c_[query_lats, query_lons]), k=int(c
 meters = distances[0].tolist()
 retorno = []
 
+#  not work
 # for i in range(len(indices)):
 #     data['features'][indices[i]]['properties'] = ["distance", meters[i]]
 #     retorno.append(data['features'][indices[i]])
