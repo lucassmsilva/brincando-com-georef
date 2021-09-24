@@ -49,7 +49,9 @@ async def items(lat: float, lon: float, distance_desired: float = 2000.0):
     }
 
 
-# install via pip fast api && uvicorn && ORJSONResponse
+# pip install -U scikit-learn
+# install pandas
+# install fast api && uvicorn && ORJSONResponse
 # execute
 # $ python -m uvicorn main:app
 # try
