@@ -3,8 +3,19 @@ from fastapi.responses import ORJSONResponse
 from sklearn.neighbors import BallTree
 import numpy as np
 import json
+import pandas as pd
 
 path = 'points.geojson'
+
+
+df = df = pd.read_csv(r'acidentes2020.csv',delimiter=';', skiprows=0, low_memory=False)
+
+t = df.head()
+t = t[['id', 'latitude', 'longitude']]
+result = t.to_json(orient="records")
+parsed = json.loads(result)
+print(json.dumps(parsed, indent=4)  )
+
 
 with open(path) as f:
     data = json.load(f)
@@ -38,5 +49,8 @@ async def items(lat: float, lon: float, distance_desired: float = 2000.0):
     }
 
 
+# install via pip fast api && uvicorn && ORJSONResponse
+# execute
+# $ python -m uvicorn main:app
+# try
 # http://127.0.0.1:8000/items/?lat=-56.0877799987793&lon=-15.620722349120022
-# install fast api && uvicorn && ORJSONResponse
